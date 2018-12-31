@@ -3,6 +3,7 @@ select
 --IDs
     oi.id,
     oi.order_id,
+    oi.line_item_number,
     oi.product_id,
     oi.variant_id,
     o.customer_id,
