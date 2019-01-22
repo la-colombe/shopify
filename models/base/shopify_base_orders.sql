@@ -20,6 +20,10 @@ SELECT
        order_status_url,
        processing_method,
        gateway,
+       case 
+              when lower(tags) like '%giftwizard%' then TRUE
+              else FALSE
+       end as gift_order,
        shipping_address_1,
        shipping_address_2,
        shipping_name,

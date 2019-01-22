@@ -25,6 +25,7 @@ SELECT
        o.processing_method,
        o.gateway,
        o.source,
+       o.gift_order,
 --Timestamps
        o.created_at,
        c.created_at as customer_created_at,
