@@ -26,6 +26,7 @@ SELECT
        o.gateway,
        o.source,
        o.gift_order,
+       o.requested_shipping_method,
 --Timestamps
        o.created_at,
        c.created_at as customer_created_at,

@@ -33,6 +33,7 @@ select
   note,
   tags,
   gateway,
+  requested_shipping_method,
   -- attribution
   browser_ip,
   source_name,
