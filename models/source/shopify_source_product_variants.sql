@@ -1,7 +1,7 @@
 select 
 
 id,
-product_id,
+_sdc_source_key_id as product_id,
 upper(sku) as sku,
 title,
 option1,

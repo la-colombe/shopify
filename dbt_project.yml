@@ -18,7 +18,7 @@ models:
         materialized: ephemeral
 
   vars:
-    source_schema:        shopify # your schema here
+    source_schema:        stitch_shopify # your schema here
     checkouts_table:      checkouts
     users_table:          customers
     orders_table:         orders

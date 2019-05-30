@@ -1,7 +1,7 @@
 select 
 
   id as fulfillment_id,
-  order_id,
+  _sdc_source_key_id as order_id,
   name,
   service,
   status,
@@ -12,4 +12,4 @@ select
   updated_at,
   shipment_status
 
-from shopify.orders__fulfillments
+from stitch_shopify.orders__fulfillments
