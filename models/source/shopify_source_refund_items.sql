@@ -4,4 +4,4 @@ Select
   line_item__sku as line_item_sku,
   quantity as refunded_quantity,
   subtotal as refunded_subtotal
-from shopify.order_refunds__refund_line_items
+from stitch_shopify.order_refunds__refund_line_items
