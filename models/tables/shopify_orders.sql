@@ -44,6 +44,8 @@ SELECT
        o.shipping_price,
        substring(od.codes_used,0,1024) as codes_used,
        od.amount as discounts,
+       od.order_discount,
+       od.freight_discount,
 
 --Calculated Columns
        datediff(second, po.created_at, o.created_at) as time_since_previous_order
