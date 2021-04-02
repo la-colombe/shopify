@@ -1,11 +1,33 @@
 name: 'shopify'
+
+config-version: 2
 version: '1.0'
 
+profile: lacolombe-dtc
+
 source-paths: ["models"]
-analysis-paths: ["analysis"]
-target-path: "target"
-clean-targets: ["target"]
+#data-paths: [directorypath]
 test-paths: ["test"]
+analysis-paths: ["analysis"]
+macro-paths: ['macros']
+#snapshot-paths: [directorypath]
+#docs-paths: [directorypath]
+#asset-paths: [directorypath]
+
+target-path: "target"
+#log-path: directorypath
+#modules-path: directorypath
+
+clean-targets: ["target"]
+
+#query-comment: string
+
+#require-dbt-version: version-range | [version-range]
+
+#quoting:
+#  database: true | false
+#  schema: true | false
+#  identifier: true | false
 
 models:
   shopify:
@@ -17,15 +39,34 @@ models:
     source:
         materialized: ephemeral
 
-  vars:
-    source_schema:        stitch_shopify # your schema here
-    checkouts_table:      checkouts
-    users_table:          customers
-    orders_table:         orders
-    transactions_table:   transactions
-    products_table:       products
-    refunds_table:        order_refunds
-    discount_codes_table: orders__discount_codes
-    order_items_table:    orders__line_items
-    order_items_properties_table:   orders__line_items__properties
-    product_variants_table: products__variants
+#seeds:
+
+#snapshots:
+
+#sources:
+
+models:
+  shopify:
+    all:
+        aggregates:
+            materialized: ephemeral
+        base:
+            materialized: ephemeral
+    source:
+        materialized: ephemeral
+
+vars:
+  source_schema:        stitch_shopify # your schema here
+  checkouts_table:      checkouts
+  users_table:          customers
+  orders_table:         orders
+  transactions_table:   transactions
+  products_table:       products
+  refunds_table:        order_refunds
+  discount_codes_table: orders__discount_codes
+  order_items_table:    orders__line_items
+  order_items_properties_table:   orders__line_items__properties
+  product_variants_table: products__variants
+
+#on-run-start: sql-statement | [sql-statement]
+#on-run-end: sql-statement | [sql-statement]
