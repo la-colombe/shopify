@@ -45,15 +45,6 @@ models:
 
 #sources:
 
-models:
-  shopify:
-    all:
-        aggregates:
-            materialized: ephemeral
-        base:
-            materialized: ephemeral
-    source:
-        materialized: ephemeral
 
 vars:
   source_schema:        stitch_shopify # your schema here
