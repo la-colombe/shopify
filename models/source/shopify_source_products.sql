@@ -10,5 +10,4 @@ select
   created_at,
   _sdc_received_at as updated_at
 
-from
-  {{ var('source_schema') }}.{{ var('products_table') }}
+from {{ source('stitch_shopify', 'products') }}

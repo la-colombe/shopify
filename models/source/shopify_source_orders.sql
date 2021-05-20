@@ -2,99 +2,102 @@
 -- https://help.shopify.com/api/reference/order
 
 select
+
   -- ids
   o.id,
-  customer__id as customer_id,
-  checkout_id,
-  cart_token,
-  checkout_token,
-  token,
+  o.customer__id as customer_id,
+  o.checkout_id,
+  o.cart_token,
+  o.checkout_token,
+  o.token,
 
   -- logical ids reported in the application
-  "number",
-  order_number,
+  o.number,
+  o.order_number,
 
   -- state
-  financial_status,
-  fulfillment_status,
-  confirmed,
-  order_status_url,
+  o.financial_status,
+  o.fulfillment_status,
+  o.confirmed,
+  o.order_status_url,
 
   -- cancellation information
-  cancel_reason,
-  cancelled_at,
+  o.cancel_reason,
+  o.cancelled_at,
 
   -- etc
-  closed_at,
-  processed_at,
-  email,
-  contact_email,
-  name,
-  note,
-  tags,
-  gateway,
-  requested_shipping_method,
+  o.closed_at,
+  o.processed_at,
+  o.email,
+  o.contact_email,
+  o.name,
+  o.note,
+  o.tags,
+  o.gateway,
+  s.requested_shipping_method,
+
   -- attribution
-  browser_ip,
-  source_name,
-  landing_site,
+  o.browser_ip,
+  o.source_name,
+  o.landing_site,
+  
   --landing_site_ref,
-  referring_site,
+  o.referring_site,
 
   -- financial
-  currency,
-  processing_method,
+  o.currency,
+  o.processing_method,
 
   -- numbers
-  subtotal_price,
-  taxes_included,
-  total_discounts,
-  total_line_items_price,
-  total_price,
-  total_price_usd,
-  total_tax,
-  total_weight,
-  shipping_price,
+  o.subtotal_price,
+  o.taxes_included,
+  o.total_discounts,
+  o.total_line_items_price,
+  o.total_price,
+  o.total_price_usd,
+  o.total_tax,
+  o.total_weight,
+  s.shipping_price,
 
   -- address
-  shipping_address__address1 as shipping_address_1,
-  shipping_address__address2 as shipping_address_2,
-  shipping_address__city as shipping_city,
-  shipping_address__company,
-  shipping_address__country as shipping_country,
-  shipping_address__country_code as shipping_country_code,
-  shipping_address__first_name,
-  shipping_address__last_name,
-  shipping_address__latitude as shipping_latitude,
-  shipping_address__longitude as shipping_longitude,
-  shipping_address__name as shipping_name,
-  shipping_address__phone,
-  shipping_address__province as shipping_state,
-  shipping_address__province_code as shipping_state_code,
-  shipping_address__zip as shipping_zip,
-  billing_address__address1,
-  billing_address__address2,
-  billing_address__city,
-  billing_address__company,
-  billing_address__country,
-  billing_address__country_code,
-  billing_address__first_name,
-  billing_address__last_name,
-  billing_address__latitude,
-  billing_address__longitude,
-  billing_address__name,
-  billing_address__phone,
-  billing_address__province,
-  billing_address__province_code,
-  billing_address__zip,
+  o.shipping_address__address1 as shipping_address_1,
+  o.shipping_address__address2 as shipping_address_2,
+  o.shipping_address__city as shipping_city,
+  o.shipping_address__company,
+  o.shipping_address__country as shipping_country,
+  o.shipping_address__country_code as shipping_country_code,
+  o.shipping_address__first_name,
+  o.shipping_address__last_name,
+  o.shipping_address__latitude as shipping_latitude,
+  o.shipping_address__longitude as shipping_longitude,
+  o.shipping_address__name as shipping_name,
+  o.shipping_address__phone,
+  o.shipping_address__province as shipping_state,
+  o.shipping_address__province_code as shipping_state_code,
+  o.shipping_address__zip as shipping_zip,
+  o.billing_address__address1,
+  o.billing_address__address2,
+  o.billing_address__city,
+  o.billing_address__company,
+  o.billing_address__country,
+  o.billing_address__country_code,
+  o.billing_address__first_name,
+  o.billing_address__last_name,
+  o.billing_address__latitude,
+  o.billing_address__longitude,
+  o.billing_address__name,
+  o.billing_address__phone,
+  o.billing_address__province,
+  o.billing_address__province_code,
+  o.billing_address__zip,
 
   -- audit
-  convert_timezone('America/New_York',created_at) as created_at,
+  convert_timezone('America/New_York',o.created_at) as created_at,
   greatest(o._sdc_received_at, s.updated_at) as updated_at
 
-from
-  {{ var('source_schema') }}.{{ var('orders_table') }} o
+from {{ source('stitch_shopify', 'orders') }} o
 left join {{ref('shopify_source_shipping')}} s on s.id = o.id
+
 where
   -- filter test transactions
-  test = false
+  o.test = false

@@ -1,4 +1,5 @@
 select
+
   id,
   first_name,
   last_name,
@@ -13,5 +14,4 @@ select
   _sdc_received_at as updated_at,
   accepts_marketing
 
-from
-  {{ var('source_schema') }}.{{ var('users_table') }}
+from {{ source('stitch_shopify', 'customers') }}

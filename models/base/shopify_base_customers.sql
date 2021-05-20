@@ -1,13 +1,14 @@
 select
-  u.id,
+
+  id,
   first_name,
   last_name,
-  u.email,
+  email,
   state,
-  u.tags,
+  tags,
   tax_exempt,
-  u.created_at,
-  u.updated_at,
+  created_at,
+  updated_at,
   accepts_marketing
 
-from {{ref('shopify_source_users')}} u
+from {{ref('shopify_source_users')}}

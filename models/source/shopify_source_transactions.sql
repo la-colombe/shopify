@@ -19,8 +19,7 @@ select
   created_at,
   _sdc_received_at as updated_at
 
-from
-  {{ var('source_schema') }}.{{ var('transactions_table') }}
+from {{ source('stitch_shopify', 'transactions') }}
 
 where
   -- filter test transactions

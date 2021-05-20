@@ -12,4 +12,4 @@ select
   updated_at,
   shipment_status
 
-from stitch_shopify.orders__fulfillments
+from {{ source('stitch_shopify', 'orders__fulfillments') }}

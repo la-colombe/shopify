@@ -8,5 +8,4 @@ select
   _sdc_received_at as updated_at
 
 
-from
-  {{ var('source_schema') }}.{{ var('discount_codes_table') }}
+from {{ source('stitch_shopify', 'orders__discount_codes') }}

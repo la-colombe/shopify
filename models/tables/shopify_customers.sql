@@ -1,28 +1,29 @@
 select
-	id,
-	first_name,
-	last_name,
-	email,
-	state,
-	tags,
-	tax_exempt,
-	created_at,
+
+	c.id,
+	c.first_name,
+	c.last_name,
+	c.email,
+	c.state,
+	c.tags,
+	c.tax_exempt,
+	c.created_at,
 	greatest(c.updated_at, ca.updated_at) as updated_at,
-	accepts_marketing,
+	c.accepts_marketing,
 
 -- Aggregates
-	number_of_orders,
-	average_order_value,
-	first_order_date,
-	last_order_date,
-	years_active,
-	lifetime_revenue,
-	items_purchased,
-	substring(codes_used, 0, 1024) as codes_used,
+	ca.number_of_orders,
+	ca.average_order_value,
+	ca.first_order_date,
+	ca.last_order_date,
+	ca.years_active,
+	ca.lifetime_revenue,
+	ca.items_purchased,
+	substring(cd.codes_used, 0, 1024) as codes_used,
 
 -- Calculated Columns
-	lifetime_revenue / nullif(years_active,0) as annual_revenue,
-	items_purchased::float / nullif(number_of_orders,0) as items_per_order
+	ca.lifetime_revenue / nullif(ca.years_active,0) as annual_revenue,
+	ca.items_purchased::float / nullif(ca.number_of_orders,0) as items_per_order
 
  from {{ref('shopify_base_customers')}} c
  join {{ref('shopify_customer_aggregates')}} ca on ca.customer_id = c.id
