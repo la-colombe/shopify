@@ -8,6 +8,7 @@ select
 	option2,
 	option3,
 	price,
+	compare_at_price,
 	weight,
 	weight_unit,
 	_sdc_received_at as updated_at

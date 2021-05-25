@@ -19,6 +19,7 @@ select
   
 --Numbers
   oi.price,
+  oi.compare_at_price,
   oi.quantity,
   oi.line_item_discount,
   oi.line_item_net_sales,

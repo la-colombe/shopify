@@ -16,6 +16,7 @@ select
 
 --Numbers
   oi.price,
+  pv.compare_at_price,
   oi.quantity,
   oi.total_discount as line_item_discount,
   (oi.price * oi.quantity) - oi.total_discount as line_item_net_sales,
@@ -25,6 +26,7 @@ select
   pv.weight * oi.quantity as line_item_weight,
   ri.refunded_quantity,
   ri.refunded_subtotal,
+
     
 --Timestamps
   greatest(oi.updated_at, p.updated_at, pv.updated_at) as updated_at,
