@@ -7,7 +7,7 @@ profile: lacolombe-dtc
 
 source-paths: ["models"]
 #data-paths: [directorypath]
-test-paths: ["test"]
+test-paths: ["tests"]
 analysis-paths: ["analysis"]
 macro-paths: ['macros']
 #snapshot-paths: [directorypath]

@@ -15,6 +15,17 @@ sources:
       description: https://shopify.dev/docs/admin-api/rest/reference/customers/customer
     - name: orders
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
+    - name: orders__discount_applications
+      description: >
+        List of all discounts applied to each order. Only discount code, line item discounts (buy X get Y free), 
+        and client service discounts are included. Price cuts are not captured in this table. 
+        Orders with more than one discount applied are split into multiple rows.
+        https://shopify.dev/docs/admin-api/rest/reference/orders/order
+      columns:
+        - name: type
+          tests: 
+            - not_null:
+                severity: warn
     - name: orders__discount_codes
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
     - name: orders__line_items
@@ -39,5 +50,66 @@ sources:
 
 models:
 
-  - name: shopify_base_orders
+### aggregates
 
+  - name: shopify_customer_aggregates
+  - name: shopify_customer_discounts
+  - name: shopify_order_aggregates
+  - name: shopify_order_discount_applications
+    description: Single row per order with the associated discount type and title. Only includes orders with a discount code, manual, or line item discount. For records with more than one unique discount type applied to the order, 'multi' is returned for both the type and title.
+    columns:
+      - name: order_id
+        description: Foreign key that joins back to orders.id in Shopify.
+      - name: distinct_types
+        description: Count of the unique discount types applied to the order. It is assumed (and tested) that orders with more than one discount type represents < 1% of all orders with discounts.
+      - name: discount_type
+        description: Type of discount applied to order. Valid options include discount_code (coupon), manual (one-off client services discount), script and automatic (both line_item discounts), or multi (2 or more discount types).
+      - name: discount_title
+        description: Name of discount. For discount_code, this will always be null. Orders with more than one discount type will return 'multi' as the title.
+      - name: updated_at
+        description: Most recent batch load date from Stitch to Redshift for the given order_id.
+  - name: shopify_order_discounts 
+
+### base
+
+  - name: shopify_base_customers
+  - name: shopify_base_discount_applications
+    description: >
+      List of all orders with associated discounts. Only discount code, line item discounts (buy X get Y free), 
+      and client service discounts are included. Price cuts are not captured in this table. 
+      Orders with more than one discount applied are split into multiple rows.
+    columns:      
+      - name: order_id
+        description: Foreign key that joins back to orders.id in Shopify.
+      - name: type
+        description: >
+          Type of discount applied to order. Valid options include discount_code (coupon), 
+          manual (one-off client services discount), and script and automatic (both line_item discounts).
+      - name: title
+        description: Name of discount. For discount_code, this will always be null.
+      - name: updated_at
+        description: Timestamp indicating when Stitch loaded the batch the record was a part of into Redshift.
+  - name: shopify_base_order_items
+  - name: shopify_base_orders      
+
+### tables
+
+  - name: shopify_customers
+  - name: shopify_order_discount_codes
+  - name: shopify_order_fulfillments
+  - name: shopify_order_items
+  - name: shopify_orders 
+    columns:
+      - name: discount_type
+        description: Type of discount applied to order. Valid options include discount_code (coupon), manual (one-off client services discount), script and automatic (both line_item discounts), or multi (2 or more discount types). Price cuts are not captured in this field.
+      - name: discount_title
+        description: Name of discount. For discount_code, this will always be null. Orders with more than one discount type will return 'multi' as the title.
+      - name: codes_used
+        description: Comma-separated list of all coupon codes applied to the order. Coupon codes are cast to all lower case before returning here.
+      - name: discounts
+        description: Total order-level discount amount applied through a coupon code. Includes both product and shipping discounts.
+      - name: order_discount
+        description: Product order-level discounts applied through a coupon code. Does not include shipping discounts.
+      - name: freight_discount
+        description: Order-level shipping discounts applied through a coupon code. 
+ 

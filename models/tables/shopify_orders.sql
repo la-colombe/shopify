@@ -45,6 +45,8 @@ select
   oa.gross_sales,
   oa.weight,
   o.shipping_price,
+  oda.discount_type as discount_type,
+  oda.discount_title as discount_title,
   substring(od.codes_used,0,1024) as codes_used,
   od.amount as discounts,
   od.order_discount,
@@ -58,3 +60,4 @@ join {{ref('shopify_order_aggregates')}} oa on oa.order_id = o.id
 join {{ref('shopify_base_customers')}} c on c.id = o.customer_id
 left join {{ref('shopify_base_orders')}} po on po.customer_id = o.customer_id and po.customer_order_number = (o.customer_order_number - 1)
 left join {{ref('shopify_order_discounts')}} od on od.order_id = o.id
+left join {{ref('shopify_order_discount_applications')}} oda on oda.order_id = o.id
