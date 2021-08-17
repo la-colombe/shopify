@@ -5,7 +5,8 @@
 
 {{
   config(
-    severity='warn'
+    severity='error',
+    tags='dtc_weekly_tests'
   )
 }}
 
