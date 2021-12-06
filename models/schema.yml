@@ -32,6 +32,8 @@ sources:
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
     - name: orders__line_items__properties
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
+    - name: orders__line_items__discount_allocations
+      description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
     - name: orders__fulfillments
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/order
     - name: orders__shipping_lines
