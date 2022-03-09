@@ -33,6 +33,7 @@ select
   o.customer_order_number,    
   o.net_sales as order_net_sales,
   o.gross_sales as order_gross_sales,
+
 --Timestamps
   o.created_at,
   o.cancelled_at,

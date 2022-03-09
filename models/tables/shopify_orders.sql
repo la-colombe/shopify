@@ -48,8 +48,8 @@ select
   oda.discount_type as discount_type,
   oda.discount_title as discount_title,
   substring(od.codes_used,0,1024) as codes_used,
-  od.amount as discounts,
-  od.order_discount,
+  od.amount as discounts,  -- To be deprecated. oa.order_discount now includes all discounts, except for freight discounts
+  oa.order_discount,
   od.freight_discount,
 
 --Calculated Columns
