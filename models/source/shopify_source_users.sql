@@ -3,7 +3,7 @@ select
   id,
   first_name,
   last_name,
-  email,
+  lower(email) as email,
   verified_email,
   default_address__id as default_address_id,
   note,

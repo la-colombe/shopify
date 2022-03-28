@@ -28,8 +28,8 @@ select
   -- etc
   o.closed_at,
   o.processed_at,
-  o.email,
-  o.contact_email,
+  lower(o.email) as email,
+  lower(o.contact_email) as contact_email,
   o.name,
   o.note,
   o.tags,
