@@ -18,15 +18,14 @@ select
   oi.price,
   pv.compare_at_price,
   oi.quantity,
-  oi.total_discount as line_item_discount,
-  (oi.price * oi.quantity) - oi.total_discount as line_item_net_sales,
+  oid.line_item_discount,
+  (oi.price * oi.quantity) - nvl(oid.line_item_discount,0) as line_item_net_sales,
   (oi.price * oi.quantity) as line_item_gross_sales,
   pv.weight,
   pv.weight_unit,
   pv.weight * oi.quantity as line_item_weight,
   ri.refunded_quantity,
   ri.refunded_subtotal,
-
     
 --Timestamps
   greatest(oi.updated_at, p.updated_at, pv.updated_at) as updated_at,
@@ -38,3 +37,4 @@ from {{ref('shopify_source_order_items')}} oi
 left join {{ref('shopify_source_products')}} p on p.id = oi.product_id
 left join {{ref('shopify_source_product_variants')}} pv on pv.id = oi.variant_id
 left join {{ref('shopify_source_refund_items')}} ri on oi.id = ri.line_item_id
+left join {{ref('shopify_order_item_discounts')}} oid using(order_id, line_item_number)
