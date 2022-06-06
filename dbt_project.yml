@@ -2,13 +2,14 @@ name: 'shopify'
 
 config-version: 2
 version: '1.0'
+require-dbt-version: ">=1.0.0"
 
 profile: lacolombe-dtc
 
-source-paths: ["models"]
-#data-paths: [directorypath]
+model-paths: ["models"]
+#seed-paths: [directorypath]
 test-paths: ["tests"]
-analysis-paths: ["analysis"]
+analysis-paths: ["analyses"]
 macro-paths: ['macros']
 #snapshot-paths: [directorypath]
 #docs-paths: [directorypath]
@@ -18,7 +19,9 @@ target-path: "target"
 #log-path: directorypath
 #modules-path: directorypath
 
-clean-targets: ["target"]
+clean-targets: 
+    - "target" 
+    - "dbt_packages"
 
 #query-comment: string
 
