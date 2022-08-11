@@ -45,7 +45,7 @@ select
 
 --Calculated Columns
   case
-    when o.source = 'recharge' and nvl(oi.product_type,'') in ('Coffee','RTD','Tea') then 'Subscription'
+    when o.source in ('recharge','ordergroove') and nvl(oi.product_type,'') in ('Coffee','RTD','Tea') then 'Subscription'
     else 'Non-Subscription'
   end as subscription_type
 
