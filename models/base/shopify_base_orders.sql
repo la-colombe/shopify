@@ -14,6 +14,7 @@ select
     when 'web' then 'web'
     when '294517' then 'recharge'
     when 'Giftwizard' then 'giftwizard'
+    when 'subscription_contract' then 'ordergroove'
     else 'other'
   end as source,
 
