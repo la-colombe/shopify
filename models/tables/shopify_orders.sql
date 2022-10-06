@@ -45,8 +45,14 @@ select
   oa.gross_sales,
   oa.weight,
   o.shipping_price,
-  oda.discount_type as discount_type,
-  oda.discount_title as discount_title,
+  case 
+    when o.source = 'ordergroove' and oda.discount_type = 'manual' and oda.discount_title = 'Item Discount' then 'automatic'
+    else oda.discount_type
+  end as discount_type,
+  case 
+    when o.source = 'ordergroove' and oda.discount_type = 'manual' and oda.discount_title = 'Item Discount' then 'Subscribe & Save'
+    else oda.discount_title
+  end as discount_title,  
   substring(od.codes_used,0,1024) as codes_used,
   od.amount as discounts,  -- To be deprecated. oa.order_discount now includes all discounts, except for freight discounts
   oa.order_discount,
