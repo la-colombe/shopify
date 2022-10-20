@@ -1,8 +1,8 @@
 select
 
   id,
-  first_name,
-  last_name,
+  replace(first_name,chr(10),'')) as first_name,
+  replace(last_name,chr(10),'')) as last_name,
   lower(email) as email,
   verified_email,
   default_address__id as default_address_id,
