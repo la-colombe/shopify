@@ -10,14 +10,6 @@ select
 
 --Order Status
 
-  case source_name
-    when 'web' then 'web'
-    when '294517' then 'recharge'
-    when 'Giftwizard' then 'giftwizard'
-    when 'subscription_contract' then 'ordergroove'
-    else 'other'
-  end as source,
-
   financial_status,
   fulfillment_status,
   order_status_url,
@@ -30,6 +22,13 @@ select
     else FALSE
   end as gift_order,
   lower(tags) like '%ordergroove prepaid order%' as is_prepaid_subscription, 
+  case 
+    when is_prepaid_subscription or source_name = 'subscription_contract' then 'ordergroove'
+    when source_name = 'web' then 'web'
+    when source_name = '294517' then 'recharge'
+    when source_name = 'Giftwizard' then 'giftwizard'
+    else 'other'
+  end as source,
 
   shipping_address_1,
   shipping_address_2,
