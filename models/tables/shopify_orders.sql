@@ -27,6 +27,7 @@ select
   o.gateway,
   o.source,
   o.gift_order,
+  o.is_prepaid_subscription,
   o.requested_shipping_method,
   
 --Timestamps
@@ -38,6 +39,7 @@ select
   
 --Numbers
   o.customer_order_number,
+  o.customer_prepaid_order_number,
 
 --Order Aggregates
   oa.count_of_items,
