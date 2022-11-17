@@ -29,6 +29,7 @@ select
     when lower(tags) like '%giftwizard%' then TRUE
     else FALSE
   end as gift_order,
+  lower(tags) like '%ordergroove prepaid order%' as is_prepaid_subscription, 
 
   shipping_address_1,
   shipping_address_2,
@@ -49,6 +50,7 @@ select
   cancelled_at,
 
 --Calculated Fields
-  rank() over (partition by customer_id order by created_at, id asc) AS customer_order_number
+  rank() over (partition by customer_id order by created_at, id asc) AS customer_order_number,
+  case when is_prepaid_subscription then rank() over (partition by customer_id, is_prepaid_subscription order by created_at, id asc) end as customer_prepaid_order_number
 
 from {{ref('shopify_source_orders')}} o
