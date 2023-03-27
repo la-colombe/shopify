@@ -63,7 +63,6 @@ select
   o.shipping_address__address1 as shipping_address_1,
   o.shipping_address__address2 as shipping_address_2,
   o.shipping_address__city as shipping_city,
-  o.shipping_address__company,
   o.shipping_address__country as shipping_country,
   o.shipping_address__country_code as shipping_country_code,
   o.shipping_address__first_name,
