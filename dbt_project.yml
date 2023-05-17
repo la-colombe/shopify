@@ -15,7 +15,6 @@ macro-paths: ['macros']
 #docs-paths: [directorypath]
 #asset-paths: [directorypath]
 
-target-path: "target"
 #log-path: directorypath
 #modules-path: directorypath
 
