@@ -26,6 +26,7 @@ select
   o.processing_method,
   o.gateway,
   o.source,
+  o.tags,
   o.gift_order,
   o.is_prepaid_subscription,
   o.requested_shipping_method,
@@ -47,6 +48,8 @@ select
   oa.gross_sales,
   oa.weight,
   o.shipping_price,
+  o.shipping_amount_paid,
+  o.total_tax,
   case 
     when o.source = 'ordergroove' and oda.discount_type = 'manual' and oda.discount_title = 'Item Discount' then 'automatic'
     else oda.discount_type

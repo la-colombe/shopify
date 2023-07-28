@@ -16,7 +16,8 @@ select
   processing_method,
   gateway,
   requested_shipping_method,
-
+  
+  tags,
   case 
     when lower(tags) like '%giftwizard%' then TRUE
     else FALSE
@@ -42,6 +43,8 @@ select
   shipping_state_code,
   shipping_zip,
   shipping_price,
+  shipping_amount_paid,
+  total_tax,
 
 --Timestamps
   created_at,

@@ -58,6 +58,7 @@ select
   o.total_tax,
   o.total_weight,
   s.shipping_price,
+  o.total_shipping_price_set__presentment_money__amount as shipping_amount_paid,
 
   -- address
   o.shipping_address__address1 as shipping_address_1,
