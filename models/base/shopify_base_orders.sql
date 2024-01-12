@@ -22,15 +22,17 @@ select
     when lower(tags) like '%giftwizard%' then TRUE
     else FALSE
   end as gift_order,
-  lower(tags) like '%ordergroove prepaid order%' as is_prepaid_subscription, 
+  lower(tags) like '%ordergroove prepaid order%' or lower(tags) like '%prepaid fulfillment order%' as is_prepaid_subscription, 
   case 
-    when is_prepaid_subscription or source_name = 'subscription_contract' then 'ordergroove'
+    when is_prepaid_subscription 
+      or lower(tags) like '%ordergroove subscription order%' 
+      or lower(tags) like '%ordergroove trigger order%' 
+      then 'ordergroove'
     when source_name = 'web' then 'web'
     when source_name = '294517' then 'recharge'
     when source_name = 'Giftwizard' then 'giftwizard'
     else 'other'
   end as source,
-
   shipping_address_1,
   shipping_address_2,
   shipping_name,
