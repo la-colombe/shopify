@@ -47,6 +47,7 @@ select
   oa.net_sales,
   oa.gross_sales,
   oa.weight,
+  oa.basket_type,
   o.shipping_price,
   o.shipping_amount_paid,
   o.total_tax,
