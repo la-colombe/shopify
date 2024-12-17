@@ -38,6 +38,7 @@ select
   o.created_at,
   o.cancelled_at,
   greatest(o.updated_at, oi.updated_at) as updated_at,
+  o.first_fulfilled_at,
 
 --Order Status
   o.financial_status,

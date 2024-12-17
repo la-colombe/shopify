@@ -37,6 +37,7 @@ select
   o.cancelled_at,
   greatest(oa.updated_at, o.updated_at, c.updated_at) as updated_at,
   po.created_at as previous_order_created_at,
+  fa.first_fulfilled_at,
   
 --Numbers
   o.customer_order_number,
@@ -73,3 +74,4 @@ join {{ref('shopify_base_customers')}} c on c.id = o.customer_id
 left join {{ref('shopify_base_orders')}} po on po.customer_id = o.customer_id and po.customer_order_number = (o.customer_order_number - 1)
 left join {{ref('shopify_order_discounts')}} od on od.order_id = o.id
 left join {{ref('shopify_order_discount_applications')}} oda on oda.order_id = o.id
+left join {{ref('shopify_fulfillment_aggregates')}} fa on fa.order_id = o.id
