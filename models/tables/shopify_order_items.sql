@@ -38,7 +38,7 @@ select
   o.created_at,
   o.cancelled_at,
   greatest(o.updated_at, oi.updated_at) as updated_at,
-  fa.first_fulfilled_at,
+  o.first_fulfilled_at,
 
 --Order Status
   o.financial_status,
@@ -55,4 +55,3 @@ select
 
 from {{ref('shopify_base_order_items')}} oi
 join {{ref('shopify_orders')}} o on oi.order_id = o.id
-left join {{ref('shopify_fulfillment_aggregates')}} fa on fa.order_id = o.id
