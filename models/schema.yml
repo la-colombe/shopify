@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: stitch_shopify
     loader: stitch
+    schema: shopify_singer
     description: https://shopify.dev/docs/admin-api/rest/reference
     freshness:
       warn_after: {count: 12, period: hour}
@@ -42,7 +43,7 @@ sources:
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/transaction
     - name: products
       description: https://shopify.dev/docs/admin-api/rest/reference/products/product
-    - name: products__variants
+    - name: product_variants
       description: https://shopify.dev/docs/admin-api/rest/reference/products/product-variant
     - name: order_refunds
       description: https://shopify.dev/docs/admin-api/rest/reference/orders/refund

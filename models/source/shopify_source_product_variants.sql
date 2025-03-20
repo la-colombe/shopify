@@ -1,16 +1,13 @@
 select 
 
 	id,
-	_sdc_source_key_id as product_id,
+	product__id as product_id,
 	upper(sku) as sku,
 	title,
-	option1,
-	option2,
-	option3,
 	price,
-	compare_at_price,
-	weight,
-	weight_unit,
+	compareatprice as compare_at_price,
+	null::float as weight, --removed in singer tap
+	null as weight_unit, --removed in singer tap
 	_sdc_received_at as updated_at
 
-from {{ source('stitch_shopify', 'products__variants') }}
+from {{ source('stitch_shopify', 'product_variants') }}

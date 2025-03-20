@@ -12,6 +12,6 @@ select
   tax_exempt,
   convert_timezone('America/New_York',created_at) as created_at,
   _sdc_received_at as updated_at,
-  accepts_marketing
+  null as accepts_marketing --deprecated in shopify_singer
 
 from {{ source('stitch_shopify', 'customers') }}
