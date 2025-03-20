@@ -33,7 +33,7 @@ select
   o.name,
   o.note,
   o.tags,
-  o.gateway,
+  null as gateway, --removed in singer tap
   s.requested_shipping_method,
 
   -- attribution
@@ -46,7 +46,7 @@ select
 
   -- financial
   o.currency,
-  o.processing_method,
+  null as processing_method, --removed in singer tap
 
   -- numbers
   o.subtotal_price,
@@ -54,7 +54,7 @@ select
   o.total_discounts,
   o.total_line_items_price,
   o.total_price,
-  o.total_price_usd,
+  --o.total_price_usd,
   o.total_tax,
   o.total_weight,
   s.shipping_price,
@@ -95,7 +95,7 @@ select
   convert_timezone('America/New_York',o.created_at) as created_at,
   greatest(o._sdc_received_at, s.updated_at) as updated_at
 
-from {{ source('stitch_shopify', 'orders') }} o
+from {{ source('shopify_singer', 'orders') }} o
 left join {{ref('shopify_source_shipping')}} s on s.id = o.id
 
 where

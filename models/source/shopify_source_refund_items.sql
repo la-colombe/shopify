@@ -6,4 +6,4 @@ select
   quantity as refunded_quantity,
   subtotal as refunded_subtotal
   
-from {{ source('stitch_shopify', 'order_refunds__refund_line_items') }}
+from {{ source('shopify_singer', 'order_refunds__refund_line_items') }}

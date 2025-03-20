@@ -5,5 +5,5 @@ select
 	max(title) as requested_shipping_method,
 	max(_sdc_received_at) as updated_at
 
-from {{ source('stitch_shopify', 'orders__shipping_lines') }}
+from {{ source('shopify_singer', 'orders__shipping_lines') }}
 group by 1
