@@ -6,6 +6,8 @@ select
   oi.product_id,
   oi.variant_id,
   oi.line_item_number,
+  oipa.prepaid_origin_order_number,
+  oipa.prepaid_orders_per_billing,
 
 --Item Info
   oi.name,
@@ -38,3 +40,4 @@ left join {{ref('shopify_source_products')}} p on p.id = oi.product_id
 left join {{ref('shopify_source_product_variants')}} pv on pv.id = oi.variant_id
 left join {{ref('shopify_source_refund_items')}} ri on oi.id = ri.line_item_id
 left join {{ref('shopify_order_item_discounts')}} oid using(order_id, line_item_number)
+left join {{ref('shopify_order_item_property_aggregates')}} oipa using(order_id, line_item_number)

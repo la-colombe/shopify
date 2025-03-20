@@ -8,6 +8,8 @@ select
   oi.variant_id,
   o.customer_id,
   o.order_number,
+  oi.prepaid_origin_order_number,
+  oi.prepaid_orders_per_billing,
 
 --Item Info
   oi.name,

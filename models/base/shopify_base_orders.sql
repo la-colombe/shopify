@@ -23,6 +23,7 @@ select
     else FALSE
   end as gift_order,
   lower(tags) like '%ordergroove prepaid order%' or lower(tags) like '%prepaid fulfillment order%' as is_prepaid_subscription, 
+  --nullif(trim(nullif(substring(split_part(tags, 'prepaid-origin-order=', 2), 1,8),'nknown')),'') as prepaid_origin_order_number,
   case 
     when is_prepaid_subscription 
       or lower(tags) like '%ordergroove subscription order%' 
