@@ -19,4 +19,4 @@ select
   grams,
   _sdc_received_at as updated_at
 
-from {{ source('stitch_shopify', 'orders__line_items') }}
+from {{ source('shopify_singer', 'orders__line_items') }}

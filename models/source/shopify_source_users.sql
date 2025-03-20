@@ -14,4 +14,4 @@ select
   _sdc_received_at as updated_at,
   null as accepts_marketing --deprecated in shopify_singer
 
-from {{ source('stitch_shopify', 'customers') }}
+from {{ source('shopify_singer', 'customers') }}

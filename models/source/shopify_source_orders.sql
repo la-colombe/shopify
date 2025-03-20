@@ -95,7 +95,7 @@ select
   convert_timezone('America/New_York',o.created_at) as created_at,
   greatest(o._sdc_received_at, s.updated_at) as updated_at
 
-from {{ source('stitch_shopify', 'orders') }} o
+from {{ source('shopify_singer', 'orders') }} o
 left join {{ref('shopify_source_shipping')}} s on s.id = o.id
 
 where

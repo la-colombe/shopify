@@ -6,4 +6,4 @@ select
   nvl(value__string, value__bigint::varchar) as property_value,
   _sdc_received_at as updated_at
 
-from {{ source('stitch_shopify', 'orders__line_items__properties') }}
+from {{ source('shopify_singer', 'orders__line_items__properties') }}

@@ -11,4 +11,4 @@ select
   _sdc_received_at as updated_at
 
 
-from {{ source('stitch_shopify', 'orders__discount_applications') }}
+from {{ source('shopify_singer', 'orders__discount_applications') }}

@@ -10,4 +10,4 @@ select
 	null as weight_unit, --removed in singer tap
 	_sdc_received_at as updated_at
 
-from {{ source('stitch_shopify', 'product_variants') }}
+from {{ source('shopify_singer', 'product_variants') }}
